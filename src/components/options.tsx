@@ -7,17 +7,17 @@ const Options = () => {
 
     return (
         <div className=''>
-            <div className='flex flex-col items-center justify-center'>
-                <label>Bill</label>
-                <div className='flex'>
+            <div className='flex flex-col '>
+                <label className='text-start text-gray-500 font-semibold text-l'>Bill</label>
+                <div className='flex '>
                     <p>$</p>
                     <input type='text' value={bill} onChange={(e) => setBill(e.target.value)}
                         className='bg-transparent outline-none' />
 
                 </div>
             </div>
-            <div>
-                <label>  Select Tip % </label>
+            <div className='flex flex-col '>
+                <label className='text-start text-gray-500 font-semibold text-l'>  Select Tip % </label>
                 <div className='grid grid-cols-3 '>
                     <div> 5%</div>
                     <div> 10%</div>
@@ -29,8 +29,8 @@ const Options = () => {
                     </div>
                 </div>
             </div>
-            <div className='flex flex-col items-center justify-center'>
-                <label>    Number of People </label>
+            <div className='flex flex-col '>
+                <label className='text-start text-gray-500 font-semibold text-l'>    Number of People </label>
                 <div className='flex'>
                     <img src={Person} />
                     <input type='text' value={person} className='bg-transparent outline-none' />
