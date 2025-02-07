@@ -8,6 +8,7 @@ export default {
     extend: {
       colors: {
         darkCyan: 'hsl(183, 100%, 15%)',
+        strongcyan: 'hsl(172, 67%, 45%)'
       }
     },
   },
