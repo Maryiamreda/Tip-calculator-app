@@ -9,8 +9,11 @@ function App() {
   return (
 
     <div >
-      <Options />
-      <TipAmount />
+      <div className='flex'>
+        <Options />
+        <TipAmount />
+      </div>
+
     </div>
   )
 }
