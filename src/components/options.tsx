@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Person from '/images/icon-person.svg'
+import { useDispatch } from 'react-redux';
+import { setTipAmount, setTotal } from '../store/locationSlice';
 const Options = () => {
     const [bill, setBill] = useState<number>(0);
     const [person, setPerson] = useState<number>(1)
@@ -7,7 +9,7 @@ const Options = () => {
     const [error, setError] = useState(false)
     const billInputRef = useRef<HTMLInputElement>(null);
     const personInputRef = useRef<HTMLInputElement>(null);
-
+    const dispatch = useDispatch();
     useEffect(
         () => {
             if (person % 1 !== 0 || person < 1 || person > 9999) {
@@ -20,6 +22,13 @@ const Options = () => {
             }
         }
         , [person])
+    useEffect(() => {
+        let tipamount = (bill * customTip / 100);
+        let tipAmountPerPeron = tipamount / person;
+        let totalBillPerPerson = tipAmountPerPeron + (bill / person);
+        dispatch(setTotal(totalBillPerPerson));
+        dispatch(setTipAmount(tipAmountPerPeron));
+    }, [bill, person, customTip])
     return (
         <div className='w-[250px] flex flex-col gap-7'>
             <div className='flex flex-col  '>
@@ -36,15 +45,16 @@ const Options = () => {
                 </div>
             </div>
             <div className='flex flex-col '>
-                <label className='text-start text-gray-500 font-semibold text-xs mb-1'>  Select Tip % </label>
+                <label className='text-start text-gray-500  text-xs mb-1 font-bold '>  Select Tip % </label>
                 <div className='tip-amount grid grid-cols-3 gap-2  '>
-                    <div className='bg-darkCyan rounded p-1 text-white hover:bg-strongcyan cursor-pointer'> 5%</div>
-                    <div className='bg-darkCyan  rounded p-1 text-white  hover:bg-strongcyan cursor-pointer'> 10%</div>
-                    <div className='bg-darkCyan  rounded p-1 text-white  hover:bg-strongcyan cursor-pointer'> 15%</div>
-                    <div className='bg-darkCyan  rounded p-1 text-white  hover:bg-strongcyan cursor-pointer'> 25%</div>
-                    <div className='bg-darkCyan  rounded p-1 text-white  hover:bg-strongcyan cursor-pointer'> 30%</div>
-                    <div className='bg-slate-100  rounded p-1'>
-                        <input type='text' placeholder='Custom' className='bg-transparent outline-none placeholder-gray-500  placeholder:font-semibold ' />
+                    <div onClick={() => setCustomTip(5)} className='bg-darkCyan rounded p-1 text-white hover:text-darkCyan hover:bg-strongcyan cursor-pointer'> 5%</div>
+                    <div onClick={() => setCustomTip(10)} className='bg-darkCyan  rounded p-1 text-white  hover:text-darkCyan  hover:bg-strongcyan cursor-pointer'> 10%</div>
+                    <div onClick={() => setCustomTip(15)} className='bg-darkCyan  rounded p-1 text-white  hover:text-darkCyan  hover:bg-strongcyan cursor-pointer'> 15%</div>
+                    <div onClick={() => setCustomTip(25)} className='bg-darkCyan  rounded p-1 text-white   hover:text-darkCyan hover:bg-strongcyan cursor-pointer'> 25%</div>
+                    <div onClick={() => setCustomTip(30)} className='bg-darkCyan  rounded p-1 text-white   hover:text-darkCyan hover:bg-strongcyan cursor-pointer'> 30%</div>
+                    <div className='bg-slate-100  rounded p-1 cursor-pointer hover:border-2 hover:border-strongcyan '>
+                        <input type='number' onChange={(e) => setCustomTip(e.target.value)} placeholder='Custom' className='bg-transparent outline-none
+                         placeholder-gray-500  placeholder:font-semibold  text-darkCyan font-bold  ' />
                     </div>
                 </div>
             </div>
