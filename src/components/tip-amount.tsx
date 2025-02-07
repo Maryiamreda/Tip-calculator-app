@@ -1,7 +1,7 @@
 
 const TipAmount = () => {
     return (
-        <div className="bg-darkCyan">
+        <div className="bg-darkCyan w-[300px]">
             <div>
                 <div className="flex">
                     <div >
