@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Person from '/images/icon-person.svg'
 import { useDispatch } from 'react-redux';
 import { setTipAmount, setTotal } from '../store/locationSlice';
